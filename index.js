@@ -16,19 +16,10 @@
 var fs = require('fs');
 var path = require('path');
 fs.mkdirRecursive = function(dirPath, mode) {
-	try {
-		fs.mkdirSync(dirPath, mode);
-	}
-	catch (error) {
-		if (error.code === 'EEXIST' || error.errno === 34) {
+		if (!fs.existsSync(dirPath)) {
 			fs.mkdirRecursive(path.dirname(dirPath), mode);
-			fs.mkdirRecursive(dirPath, mode);
 		}
-		else {
-			console.log(error);
-			return error;
-		}
-	}
+		fs.mkdirRecursive(dirPath, mode);
 	return false;
 };
 
