@@ -18,8 +18,8 @@ var path = require('path');
 var mkdirRecursive = function(dirPath, mode) {
 		if (!fs.existsSync(dirPath)) {
 			mkdirRecursive(path.dirname(dirPath), mode);
+			fs.mkdirSync(dirPath, mode);
 		}
-		fs.mkdir(dirPath, mode);
 	return false;
 };
 
